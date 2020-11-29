@@ -53,8 +53,8 @@ class ViewController: UIViewController
     
     private func performOperation(operation: (Double, Double) -> Double, op:String) {
         if operandStack.count >= 2 {
-            var histValueTmp = operandStack.map({ $0.description })
-            historyValue = histValueTmp.reduce("", combine:{ $0 + " " + $1 }) + " " + op
+            let histValueTmp = operandStack.map({ $0.description })
+            historyValue = histValueTmp.reduce("", { $0 + " " + $1 }) + " " + op
             displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
             enter()
         }
@@ -62,8 +62,8 @@ class ViewController: UIViewController
  
     private func performOperation(operation: (Double) -> Double, op:String) {
         if operandStack.count >= 1 {
-            var histValueTmp = operandStack.map({ $0.description })
-            historyValue = histValueTmp.reduce("", combine:{ $0 + " " + $1 }) + " " + op
+            let histValueTmp = operandStack.map({ $0.description })
+            historyValue = histValueTmp.reduce("", { $0 + " " + $1 }) + " " + op
             displayValue = operation(operandStack.removeLast())
             enter()
         }
@@ -79,7 +79,7 @@ class ViewController: UIViewController
     
     var displayValue: Double {
         get {
-            return NumberFormatter().numberFromString(display.text!)!.doubleValue
+            return NumberFormatter().number(from: display.text!)!.doubleValue
         }
         set {
             display.text = "\(newValue)"
